@@ -8,7 +8,7 @@ import veterinarioRoutes from './routes/veterinarioRoutes.js';
 
 const app = express();
 app.use( express.json() );
-
+app.use( cors( ) );
 dotenv.config();
 
 conectarDB();
@@ -17,21 +17,21 @@ conectarDB();
 
 const dominiosPermitidos = [ `https://apv-backend-nodejs-production.up.railway.app/${process.env.FRONTEND_URL}` ];
 
-const corsOptions = {
-    origin: function ( origin, callback )
-    {
-        if ( dominiosPermitidos.indexOf( origin ) !== -1 )
-        {
-            //Elorigen del request esta permitido
-            callback( null, true );
-        } else
-        {
-            callback( new Error( 'No permitido por CORS' ) );
-        }
-    }
-};
+// const corsOptions = {
+//     origin: function ( origin, callback )
+//     {
+//         if ( dominiosPermitidos.indexOf( origin ) !== -1 )
+//         {
+//             //Elorigen del request esta permitido
+//             callback( null, true );
+//         } else
+//         {
+//             callback( new Error( 'No permitido por CORS' ) );
+//         }
+//     }
+// };
 
-app.use( cors( ) );
+
 
 app.use( "/api/veterinarios", veterinarioRoutes );
 app.use( "/api/pacientes", pacienteRoutes );
